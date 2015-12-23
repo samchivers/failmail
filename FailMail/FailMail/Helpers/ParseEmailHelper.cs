@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FailMail.FailMail.Helpers
 {
-    public class ParseEmail
+    public class ParseEmailHelper
     {
         /// <summary>
         /// Examine the email message returned for the presence of [Labels:one,two,three]
@@ -50,6 +50,19 @@ namespace FailMail.FailMail.Helpers
             return message.Substring(startChar, endChar - startChar).Trim();
         }
 
+        public static string ParseTargetRepository(string message)
+        {
+            if (message.Contains("[Repo:") != true) return "";
+
+            var startChar = message.IndexOf("[Repo", StringComparison.Ordinal) + "[Repo:".Length;
+
+            var restOfMessage = message.Substring(startChar);
+
+            var endChar = restOfMessage.IndexOf("]", StringComparison.Ordinal) + startChar;
+
+            return message.Substring(startChar, endChar - startChar).Trim();
+        }
+
         /// <summary>
         /// Convert HTML to GitHub flavoured markdown for the body of the issue report
         /// </summary>
@@ -64,6 +77,18 @@ namespace FailMail.FailMail.Helpers
             var converter = new ReverseMarkdown.Converter(config);
 
             return converter.Convert(bodyHtml);
+        }
+
+        /// <summary>
+        /// Remove RE: or FW: from the start of the subject line
+        /// </summary>
+        /// <param name="subject"></param>
+        /// <returns>Subject minus RE: or FW:</returns>
+        public static string RemoveFowardOrReplyCharactersFromSubject(string subject)
+        {
+            var needToExamineSubject = subject.ContainsAny("RE:", "FW:");
+
+            return needToExamineSubject ? subject.Substring(3).Trim() : subject.Trim();
         }
     }
 }

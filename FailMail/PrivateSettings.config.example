@@ -1,0 +1,12 @@
+﻿<appSettings>
+  
+  <!-- Github Personal Access Token available from https://github.com/settings/tokens once logged in. **Token below is not real** -->
+  <add key="GITHUB_PERSONAL_ACCESS_TOKEN" value="55bcce8509e081454ec54856cae756aa387eb3a3"/>
+
+  <!-- Do you want to retrieve a list of repositories for a user or an organisation to check incoming emails against? valid values are "user" or "organisation"-->
+  <add key="GITHUB_USER_OR_ORGANISATION_REPOSITORY_LIST" value="user"/>
+  
+  <!-- User or Organisation name to retrieve a list of repositories for -->
+  <add key="GITHUB_USER_OR_ORGANISATION_NAME" value="samchivers"/>
+
+</appSettings>

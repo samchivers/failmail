@@ -93,7 +93,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FailMail\Repositories\ParseEmailTest.cs" />
+    <Compile Include="FailMail\Helpers\ParseEmailTest.cs" />
+    <Compile Include="FailMail\Helpers\StringHelpersTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

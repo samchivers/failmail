@@ -45,3 +45,11 @@ C:\Sites\failmail\FailMail.Tests\bin\Debug\ReverseMarkdown.dll
 C:\Sites\failmail\FailMail.Tests\bin\Debug\HtmlAgilityPack.dll
 C:\Sites\failmail\FailMail.Tests\bin\Debug\HtmlAgilityPack.pdb
 C:\Sites\failmail\FailMail.Tests\bin\Debug\HtmlAgilityPack.xml
+C:\Sites\FailMail\FailMail.Tests\bin\Debug\WebActivatorEx.dll
+C:\Sites\FailMail\FailMail.Tests\bin\Debug\Ninject.Web.Common.dll
+C:\Sites\FailMail\FailMail.Tests\bin\Debug\Ninject.dll
+C:\Sites\FailMail\FailMail.Tests\bin\Debug\Ninject.Web.Common.xml
+C:\Sites\FailMail\FailMail.Tests\bin\Debug\Ninject.xml
+C:\Sites\failmail\FailMail.Tests\bin\Debug\Octokit.dll
+C:\Sites\failmail\FailMail.Tests\bin\Debug\Octokit.pdb
+C:\Sites\failmail\FailMail.Tests\bin\Debug\Octokit.xml
