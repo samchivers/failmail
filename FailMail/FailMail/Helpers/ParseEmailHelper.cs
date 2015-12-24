@@ -50,6 +50,12 @@ namespace FailMail.FailMail.Helpers
             return message.Substring(startChar, endChar - startChar).Trim();
         }
 
+        /// <summary>
+        /// Examine the email message for the presence of [Repo:examplerepo]
+        /// and parse the results into a string
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns>Repo name or empty string</returns>
         public static string ParseTargetRepository(string message)
         {
             if (message.Contains("[Repo:") != true) return "";

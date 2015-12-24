@@ -57,6 +57,4 @@ C:\Sites\FailMail\FailMail\bin\WebActivatorEx.dll
 C:\Sites\FailMail\FailMail\bin\Ninject.xml
 C:\Sites\FailMail\FailMail\bin\Ninject.Web.Common.xml
 C:\Sites\FailMail\FailMail\bin\Ninject.Web.Mvc.xml
-C:\Sites\failmail\FailMail\bin\Typesafe.Mailgun.dll
-C:\Sites\failmail\FailMail\bin\Typesafe.Mailgun.xml
 C:\Sites\failmail\FailMail\obj\Debug\FailMail.csprojResolveAssemblyReference.cache
