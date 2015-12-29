@@ -53,3 +53,14 @@ C:\Sites\FailMail\FailMail.Tests\bin\Debug\Ninject.xml
 C:\Sites\failmail\FailMail.Tests\bin\Debug\Octokit.dll
 C:\Sites\failmail\FailMail.Tests\bin\Debug\Octokit.pdb
 C:\Sites\failmail\FailMail.Tests\bin\Debug\Octokit.xml
+C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.abstractions.dll
+C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.assert.dll
+C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.core.dll
+C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.execution.desktop.dll
+C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.abstractions.xml
+C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.assert.pdb
+C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.assert.xml
+C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.core.pdb
+C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.core.xml
+C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.execution.desktop.pdb
+C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.execution.desktop.xml

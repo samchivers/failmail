@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using FailMail.FailMail.Helpers;
+using Xunit;
 
 namespace FailMail.Tests.FailMail.Helpers
 {
@@ -8,6 +9,7 @@ namespace FailMail.Tests.FailMail.Helpers
     public class ParseEmailTest
     {
         [TestMethod]
+        [Fact]
         public void ParseLabelsWithNoLabels()
         {
             // Arrange
@@ -18,9 +20,11 @@ namespace FailMail.Tests.FailMail.Helpers
 
             // Assert
             CollectionAssert.AreEqual(new List<string>(), result);
+            Xunit.Assert.Equal(new List<string>(), result);
         }
 
         [TestMethod]
+        [Fact]
         public void ParseLabelsWithOneLabel()
         {
             // Arrange
@@ -32,9 +36,11 @@ namespace FailMail.Tests.FailMail.Helpers
 
             // Assert
             CollectionAssert.AreEqual(correctResult, result);
+            Xunit.Assert.Equal(correctResult, result);
         }
         
         [TestMethod]
+        [Fact]
         public void ParseLabelWithMultipleLabels()
         {
             // Arrange
@@ -46,9 +52,11 @@ namespace FailMail.Tests.FailMail.Helpers
 
             // Assert
             CollectionAssert.AreEqual(correctResult, result);
+            Xunit.Assert.Equal(correctResult, result);
         }
 
         [TestMethod]
+        [Fact]
         public void ParseLabelWithLabelsIncludingSpaces()
         {
             // Arrange
@@ -60,9 +68,11 @@ namespace FailMail.Tests.FailMail.Helpers
 
             // Assert
             CollectionAssert.AreEqual(correctResult, result);
+            Xunit.Assert.Equal(correctResult, result);
         }
 
         [TestMethod]
+        [Fact]
         public void ParseLabelWithExtraSquareBrackets()
         {
             // Arrange
@@ -74,9 +84,11 @@ namespace FailMail.Tests.FailMail.Helpers
 
             // Assert
             CollectionAssert.AreEqual(correctResult, result);
+            Xunit.Assert.Equal(correctResult, result);
         }
 
         [TestMethod]
+        [Fact]
         public void ParseLabelWithSpacesAfterTheComma()
         {
             // Arrange
@@ -88,9 +100,11 @@ namespace FailMail.Tests.FailMail.Helpers
 
             // Assert
             CollectionAssert.AreEqual(correctResult, result);
+            Xunit.Assert.Equal(correctResult, result);
         }
 
         [TestMethod]
+        [Fact]
         public void ParseOwnerWithNoOwner()
         {
             // Arrange
@@ -100,10 +114,12 @@ namespace FailMail.Tests.FailMail.Helpers
             var result = ParseEmailHelper.ParseOwner(message);
 
             // Assert
-            Assert.AreEqual("", result);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("", result);
+            Xunit.Assert.Equal("", result);
         }
 
         [TestMethod]
+        [Fact]
         public void ParseOwnerWithOneOwner()
         {
             // Arrange
@@ -114,10 +130,12 @@ namespace FailMail.Tests.FailMail.Helpers
             var result = ParseEmailHelper.ParseOwner(message);
 
             // Assert
-            Assert.AreEqual(correctResult, result);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(correctResult, result);
+            Xunit.Assert.Equal(correctResult, result);
         }
 
         [TestMethod]
+        [Fact]
         public void ParseLabelsAndOwner()
         {
             // Arrange
@@ -130,11 +148,15 @@ namespace FailMail.Tests.FailMail.Helpers
             var labelsResult = ParseEmailHelper.ParseLabels(message);
 
             // Assert
-            Assert.AreEqual(correctOwner, ownerResult);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(correctOwner, ownerResult);
+            Xunit.Assert.Equal(correctOwner, ownerResult);
+
             CollectionAssert.AreEqual(correctLabels, labelsResult);
+            Xunit.Assert.Equal(correctLabels, labelsResult);
         }
 
         [TestMethod]
+        [Fact]
         public void ConvertHtmlToMarkdown()
         {
             // Arrange
@@ -145,10 +167,12 @@ namespace FailMail.Tests.FailMail.Helpers
             var result = ParseEmailHelper.ConvertHtmlToMarkdown(message);
 
             // Assert
-            Assert.AreEqual(correctMarkdown, result);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(correctMarkdown, result);
+            Xunit.Assert.Equal(correctMarkdown, result);
         }
 
         [TestMethod]
+        [Fact]
         public void ParseTargetRepo()
         {
             // Arrange
@@ -159,10 +183,12 @@ namespace FailMail.Tests.FailMail.Helpers
             var result = ParseEmailHelper.ParseTargetRepository(message);
 
             // Assert
-            Assert.AreEqual(correctRepo, result);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(correctRepo, result);
+            Xunit.Assert.Equal(correctRepo, result);
         }
 
         [TestMethod]
+        [Fact]
         public void ParseLabelsAndOwnerAndRepo()
         {
             // Arrange
@@ -177,12 +203,16 @@ namespace FailMail.Tests.FailMail.Helpers
             var labelsResult = ParseEmailHelper.ParseLabels(message);
 
             // Assert
-            Assert.AreEqual(correctRepo, repoResult);
-            Assert.AreEqual(correctOwner, ownerResult);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(correctRepo, repoResult);
+            Xunit.Assert.Equal(correctRepo, repoResult);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(correctOwner, ownerResult);
+            Xunit.Assert.Equal(correctOwner, ownerResult);
             CollectionAssert.AreEqual(correctLabels, labelsResult);
+            Xunit.Assert.Equal(correctLabels, labelsResult);
         }
 
         [TestMethod]
+        [Fact]
         public void RemoveForwardOrReplyFromSubject()
         {
             // Arrange
@@ -197,9 +227,12 @@ namespace FailMail.Tests.FailMail.Helpers
             var result3 = ParseEmailHelper.RemoveFowardOrReplyCharactersFromSubject(subject3);
 
             // Assert
-            Assert.AreEqual(correctSubject, result1);
-            Assert.AreEqual(correctSubject, result2);
-            Assert.AreEqual(correctSubject, result3);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(correctSubject, result1);
+            Xunit.Assert.Equal(correctSubject, result1);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(correctSubject, result2);
+            Xunit.Assert.Equal(correctSubject, result2);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(correctSubject, result3);
+            Xunit.Assert.Equal(correctSubject, result3);
         }
     }
 }
