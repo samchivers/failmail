@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
+using FailMail.FailMail.Helpers;
 using FailMail.FailMail.Interfaces;
 using FailMail.Models;
 using Octokit;
@@ -10,11 +11,30 @@ namespace FailMail.FailMail.Repositories
 {
     class GitHubCreateIssueRepository : ICreateIssue
     {
+        /// <summary>
+        /// GitHub Client object
+        /// </summary>
         private readonly GitHubClient _gitHubClient;
+
+        /// <summary>
+        /// Are issues going to be placed against a user, 
+        /// or an organisation? set in AppSettings
+        /// </summary>
+        private readonly string _userOrOrganisationRepositoryList;
+
+        /// <summary>
+        /// User, or Organisation name owner of the repo. Set
+        /// in AppSettings
+        /// </summary>
+        private readonly string _userOrOrganisationName;
 
         public GitHubCreateIssueRepository(IGitHubAuth gitHubAuthRepository)
         {
             _gitHubClient = gitHubAuthRepository.CreateClient();
+
+            _userOrOrganisationName = ConfigurationManager.AppSettings["GITHUB_USER_OR_ORGANISATION_NAME"].ToLower();
+
+            _userOrOrganisationRepositoryList = ConfigurationManager.AppSettings["GITHUB_USER_OR_ORGANISATION_REPOSITORY_TYPE"].ToLower();
         }
 
         /// <summary>
@@ -25,31 +45,45 @@ namespace FailMail.FailMail.Repositories
         /// <returns>bool</returns>
         public async Task<bool> CreateIssue(IssueModel issue)
         {
-            // Check repo name is valid
             var validRepoName = await ValidateGithubRepositoryName(issue.RepositoryName);
 
-            var validUsername = await ValidateGithubUsername(issue.Owner);
+            var validUsername = await ValidateGithubUsername(issue.Assignee);
 
             if (validRepoName == false || validUsername == false)
             {
                 return false;
             }
 
-            // Create Issue
-
-            return true;
+            return await CreateGitHubIssue(issue);
         }
 
         /// <summary>
-        /// 
+        /// Validate username against user-provided list, and then that
+        /// it's a real github username
         /// </summary>
         /// <param name="username"></param>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         private async Task<bool> ValidateGithubUsername(string username)
         {
             if (username == "") return false;
 
-            return true;
+            var validUsernames = ConfigurationManager.AppSettings["GITHUB_VALID_USERNAMES"].Split(',').ToList();
+
+            var appValidUsername = validUsernames.Contains(username);
+
+            if (!appValidUsername) return false;
+
+            try
+            {
+                var user = await _gitHubClient.User.Get(username);
+
+                return user != null;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("ValidateUsernameException", e);
+            }
+
         }
 
         /// <summary>
@@ -62,22 +96,65 @@ namespace FailMail.FailMail.Repositories
         {
             if (repoName == "") return false;
 
-            var userOrOrganisationRepositoryList = ConfigurationManager.AppSettings["GITHUB_USER_OR_ORGANISATION_REPOSITORY_LIST"].ToLower();
-
-            var userOrOrganisationName = ConfigurationManager.AppSettings["GITHUB_USER_OR_ORGANISATION_NAME"].ToLower();
-
-            if (userOrOrganisationRepositoryList == "user")
+            if (_userOrOrganisationRepositoryList == "user")
             {
-                var repositories = await _gitHubClient.Repository.GetAllForUser(userOrOrganisationName);
+                try
+                {
+                    var repositories = await _gitHubClient.Repository.GetAllForUser(_userOrOrganisationName);
 
-                return repositories.Any(repo => string.Equals(repo.Name, repoName.Trim(), StringComparison.CurrentCultureIgnoreCase));
+                    return repositories.Any(repo => string.Equals(repo.Name, repoName.Trim(), StringComparison.CurrentCultureIgnoreCase));
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("ValidateRepositoryException", e);
+                }
             }
             else
             {
-                var repositories = await _gitHubClient.Repository.GetAllForOrg(userOrOrganisationName);
+                try
+                {
+                    var repositories = await _gitHubClient.Repository.GetAllForOrg(_userOrOrganisationName);
 
-                return repositories.Any(repo => string.Equals(repo.Name, repoName.Trim(), StringComparison.CurrentCultureIgnoreCase));
-            } 
+                    return repositories.Any(repo => string.Equals(repo.Name, repoName.Trim(), StringComparison.CurrentCultureIgnoreCase));
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("ValidateRepositoryException", e);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Create an issue against the provided repository, owned by the username provided and with
+        /// the labels requested
+        /// </summary>
+        /// <param name="issue"></param>
+        /// <returns>bool</returns>
+        private async Task<bool> CreateGitHubIssue(IssueModel issue)
+        {
+            var gitHubIssue = new NewIssue(issue.Title)
+            {
+                Body = ParseEmailHelper.ConvertHtmlToMarkdown(issue.Body),
+                Assignee = issue.Assignee
+            };
+
+            // Adding labels after due to private set 
+            // on Octokit NewIssue.Labels property
+            foreach (var label in issue.Labels)
+            {
+                gitHubIssue.Labels.Add(label);
+            }
+
+            try
+            {
+                var issueResponse = await _gitHubClient.Issue.Create(_userOrOrganisationName, issue.RepositoryName, gitHubIssue);
+
+                return issueResponse != null;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("CreateIssueException",e);
+            }
         }
     }
 }

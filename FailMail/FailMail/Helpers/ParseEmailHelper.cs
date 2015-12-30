@@ -76,13 +76,30 @@ namespace FailMail.FailMail.Helpers
         /// <returns>Markdown version of HTML email body</returns>
         public static string ConvertHtmlToMarkdown(string bodyHtml)
         {
-            const string unknownTagsConverter = "pass_through";
+            const string unknownTagsConverter = "drop";
 
             var config = new ReverseMarkdown.Config(unknownTagsConverter, true);
 
             var converter = new ReverseMarkdown.Converter(config);
 
-            return converter.Convert(bodyHtml);
+            var convertedString = converter.Convert(bodyHtml);
+
+            convertedString = AddLineBreaksBetweenEmails(convertedString);
+
+            convertedString = convertedString.Replace("&nbsp;", "").Replace(@"\", "").Trim();
+
+            return convertedString;
+        }
+
+        /// <summary>
+        /// Add Markdown linebreaks in between chains of emails for the body
+        /// of issues
+        /// </summary>
+        /// <param name="bodyHtml"></param>
+        /// <returns></returns>
+        public static string AddLineBreaksBetweenEmails(string bodyHtml)
+        {
+            return bodyHtml.Replace("**From:**", "*** \r\n **From:**");
         }
 
         /// <summary>

@@ -37,7 +37,7 @@ namespace FailMail.FailMail.Repositories
         {
             return new IssueModel
             {
-                Owner = ParseEmailHelper.ParseOwner(incomingEmailModel.BodyPlain),
+                Assignee = ParseEmailHelper.ParseOwner(incomingEmailModel.BodyPlain),
                 Body = ParseEmailHelper.ConvertHtmlToMarkdown(incomingEmailModel.BodyHtml),
                 Labels = ParseEmailHelper.ParseLabels(incomingEmailModel.BodyPlain),
                 Title = ParseEmailHelper.RemoveFowardOrReplyCharactersFromSubject(incomingEmailModel.Subject),

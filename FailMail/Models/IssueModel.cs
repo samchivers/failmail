@@ -9,11 +9,11 @@ namespace FailMail.Models
 {
     public class IssueModel
     {
-        public string Owner { get; set; }
-        public string Body { get; set; }
-        public DateTimeOffset CreatedAt { get; set; }
-        public List<string> Labels { get; set; }
         public string Title { get; set; }
+        public string Body { get; set; }
+        public string Assignee { get; set; }
+        public List<string> Labels { get; set; }
         public string RepositoryName { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
     }
 }

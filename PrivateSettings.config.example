@@ -1,4 +1,4 @@
-﻿<appSettings>
+<appSettings>
   
   <!-- Github Personal Access Token available from https://github.com/settings/tokens once logged in. **Token below is not real** -->
   <add key="GITHUB_PERSONAL_ACCESS_TOKEN" value="55bcce8509e081454ec54856cae756aa387eb3a3"/>
@@ -8,5 +8,11 @@
   
   <!-- User or Organisation name to retrieve a list of repositories for -->
   <add key="GITHUB_USER_OR_ORGANISATION_NAME" value="samchivers"/>
+  
+  <!-- List of users that can be assigned issues -->
+  <add key="GITHUB_VALID_USERNAMES" value="samchivers,someotheruser,athirduser"/>
+  
+  <!-- List of valid domains that response emails can be issued to -->
+  <add key="EMAIL_VALID_DOMAINS" value="github.com,example.org"/>
 
 </appSettings>
