@@ -53,5 +53,3 @@ C:\Sites\FailMail\FailMail.Tests\bin\Debug\Ninject.xml
 C:\Sites\failmail\FailMail.Tests\bin\Debug\Octokit.dll
 C:\Sites\failmail\FailMail.Tests\bin\Debug\Octokit.pdb
 C:\Sites\failmail\FailMail.Tests\bin\Debug\Octokit.xml
-C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.dll
-C:\Sites\failmail\FailMail.Tests\bin\Debug\xunit.xml
