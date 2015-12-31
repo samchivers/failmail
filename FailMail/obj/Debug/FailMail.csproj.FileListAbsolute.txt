@@ -57,3 +57,4 @@ C:\Sites\failmail\FailMail\bin\System.Web.WebPages.Razor.xml
 C:\Sites\failmail\FailMail\bin\Antlr3.Runtime.pdb
 C:\Sites\failmail\FailMail\obj\Debug\FailMail.dll
 C:\Sites\failmail\FailMail\obj\Debug\FailMail.pdb
+C:\Sites\failmail\FailMail\obj\Debug\FailMail.csprojResolveAssemblyReference.cache
